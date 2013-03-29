@@ -1,5 +1,6 @@
 <?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
+
 /**
 * Rel Canonical
 *
@@ -14,14 +15,31 @@ class ClassRelCanonical extends Frontend
 {
 	public function createRelCanonical(Database_Result $objPage, Database_Result $objLayout, PageRegular $objPageRegular)
 	{
-	
 		if($objPage->addCanonical)
 		{
-			print 'dfsfsdf';
+			if($objPage->canonicalType == 'internal')
+			{
+				$canonicalUrl = $this->generateLink($objPage);
+			}
+			else
+			{
+				$canonicalUrl = $objPage->canonicalWebsite;
+			}
+			
+			$xhtmlOutput = '';
+			
+			if($objPage->outputFormat == 'xhtml')
+			{
+				$xhtmlOutput = ' /';
+			}
+			
+			$GLOBALS['TL_HEAD'][] = '<link rel="canonical" href="' . $canonicalUrl . '"'.$xhtmlOutput.'>';
 		}
+	}
 	
-		
 	
-		$GLOBALS['TL_HEAD'][] = '<link rel="canonical" href="http://www.example.com"/>';
+	private function generateLink($objPage)
+	{
+		return '';
 	}
 }

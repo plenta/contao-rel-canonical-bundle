@@ -11,19 +11,11 @@
 
 
 /**
- * Config
- */
-$GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][] = array('tl_page_canonical', 'changePalette');
-/**
  * Table tl_page
  */
-//$GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'addCanonical';
-//$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_legend:hide},", "{rel_canonical_legend},addCanonical;{protected_legend:hide},", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-//$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalJumpTo,canonicalWebsite';
-
+$GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][] = array('tl_page_canonical', 'switchPalette');
 $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'addCanonical';
 $GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_legend:hide},", "{rel_canonical_legend},addCanonical;{protected_legend:hide},", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-//$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalJumpTo,canonicalWebsite';
 $GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType';
 
 
@@ -45,8 +37,8 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'       		 => array('internal', 'external'),
-	'reference'               => &$GLOBALS['TL_LANG']['PTY'],
-	'eval'                    => array('mandatory'=>true, 'includeBlankOption'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50')
+	'reference'               => &$GLOBALS['TL_LANG']['RelCanonical'],
+	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
@@ -66,32 +58,36 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalWebsite'] = array
 	'label' => &$GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'],
 	'exclude' => true,
 	'inputType' => 'text',
-	'eval' => array('rgxp'=>'url', 'maxlength'=>255, 'tl_class'=>'long')
+	'eval' => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long')
 );
 
 
+/**
+ * Class tl_page_canonical
+ */
 class tl_page_canonical extends Backend
 {
-	public function changePalette(DataContainer $dc)
+	public function switchPalette(DataContainer $dc)
 	{
 		if (!$dc->id)
         {
             return;
         }
 	
-		$objPage = $this->Database->prepare("SELECT canonicalType FROM tl_page WHERE id=?")->limit(1)->execute($dc->id);
-        
-        if ($objPage->numRows > 0 AND $objPage->canonicalType == 'internal')
-		{
-			$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalJumpTo';
-		}
+		$objCanonicalPage = $this->Database->prepare("SELECT canonicalType FROM tl_page WHERE id=?")->limit(1)->execute($dc->id);
 		
-		if ($objPage->numRows > 0 AND $objPage->canonicalType == 'external')
+		if($objCanonicalPage->numRows > 0)
 		{
-			$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalWebsite';
+			if($objCanonicalPage->canonicalType == 'internal')
+			{
+				$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalJumpTo';
+			}
+			else
+			{
+				$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalWebsite';
+			}
 		}
 	}
 }
-
 
 ?>
