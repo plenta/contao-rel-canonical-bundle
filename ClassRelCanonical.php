@@ -1,6 +1,5 @@
 <?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
-
 /**
 * Rel Canonical
 *
@@ -40,6 +39,17 @@ class ClassRelCanonical extends Frontend
 	
 	private function generateLink($objPage)
 	{
-		return '';
+		$strDomain = $this->Environment->base;
+
+		if ($objPage->domain != '')
+		{
+			$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
+		}
+		
+		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), null, $objPage->language);
+		
+		return $strUrl;
 	}
 }
+
+?>
