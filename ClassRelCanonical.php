@@ -41,12 +41,17 @@ class ClassRelCanonical extends Frontend
 	{
 		$strDomain = $this->Environment->base;
 
-		if ($objPage->domain != '')
+		$objCanonicalPage = $this->getPageDetails($objPage->canonicalJumpTo);
+
+		if ($objCanonicalPage->numRows)
 		{
-			$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
-		}
+			if ($objCanonicalPage->domain != '')
+			{
+				$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objCanonicalPage->domain . TL_PATH . '/';
+			}
 		
-		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), null, $objPage->language);
+			$strUrl = $strDomain . $this->generateFrontendUrl($objCanonicalPage->row(), null, $objCanonicalPage->language);
+		}
 		
 		return $strUrl;
 	}
