@@ -14,25 +14,14 @@ class ClassRelCanonical extends Frontend
 {
 	public function createRelCanonical(Database_Result $objPage, Database_Result $objLayout, PageRegular $objPageRegular)
 	{
-		if($objPage->addCanonical)
+		if($objPage->canonicalType == 'internal')
 		{
-			if($objPage->canonicalType == 'internal')
-			{
-				$canonicalUrl = $this->generateLink($objPage);
-			}
-			else
-			{
-				$canonicalUrl = $objPage->canonicalWebsite;
-			}
-			
-			$xhtmlOutput = '';
-			
-			if($objPage->outputFormat == 'xhtml')
-			{
-				$xhtmlOutput = ' /';
-			}
-			
-			$GLOBALS['TL_HEAD'][] = '<link rel="canonical" href="' . $canonicalUrl . '"'.$xhtmlOutput.'>';
+			$this->setRelCanonical($this->generateLink($objPage), $objPage->outputFormat);
+		}
+		
+		if($objPage->canonicalType == 'external')
+		{
+			$this->setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
 		}
 	}
 	
@@ -54,6 +43,19 @@ class ClassRelCanonical extends Frontend
 		}
 		
 		return $strUrl;
+	}
+	
+	
+	private function setRelCanonical($canonicalUrl, $outputFormat)
+	{
+		$xhtmlOutput = '';
+			
+		if($outputFormat == 'xhtml')
+		{
+			$xhtmlOutput = ' /';
+		}
+			
+		$GLOBALS['TL_HEAD'][] = '<link rel="canonical" href="' . $canonicalUrl . '"'.$xhtmlOutput.'>';
 	}
 }
 

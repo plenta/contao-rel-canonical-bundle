@@ -13,8 +13,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_page']['addCanonical'] = array('Rel Canonical nutzen', 'Für diese Seite "rel-canonical" nutzen.');
-$GLOBALS['TL_LANG']['tl_page']['canonicalType'] = array('', '');
+$GLOBALS['TL_LANG']['tl_page']['canonicalType'] = array('Rel Canonical nutzen', 'Für diese Seite "rel-canonical" nutzen.');
 $GLOBALS['TL_LANG']['tl_page']['canonicalJumpTo'] = array('Interne Seite', 'Bitte wählen Sie eine Seite aus.');
 $GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'] = array('Externe Seite', 'Bitte geben Sie eine Web-Adresse (http://…) ein.');
 

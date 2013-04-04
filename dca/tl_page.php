@@ -14,9 +14,7 @@
  * Table tl_page
  */
 $GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][] = array('tl_page_canonical', 'switchPalette');
-$GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'addCanonical';
-$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_legend:hide},", "{rel_canonical_legend},addCanonical;{protected_legend:hide},", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType';
+$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_legend:hide},", "{rel_canonical_legend},canonicalType;{protected_legend:hide},", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
 
 
 /**
@@ -33,12 +31,12 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['addCanonical'] = array
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_page']['canonicalType'],
-	'default'                 => 'internal',
+	'default'                 => 'donotset',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'       		 => array('internal', 'external'),
+	'options'       		 => array('donotset', 'internal', 'external'),
 	'reference'               => &$GLOBALS['TL_LANG']['RelCanonical'],
-	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50')
+	'eval'                    => array('submitOnChange'=>true)
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
@@ -78,13 +76,20 @@ class tl_page_canonical extends Backend
 		
 		if($objCanonicalPage->numRows > 0)
 		{
-			if($objCanonicalPage->canonicalType == 'internal')
+			switch($objCanonicalPage->canonicalType)
 			{
-				$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalJumpTo';
-			}
-			else
-			{
-				$GLOBALS['TL_DCA']['tl_page']['subpalettes']['addCanonical'] = 'canonicalType,canonicalWebsite';
+				case 'internal':
+					$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalJumpTo;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+					break;
+					
+				case 'external':
+					$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalWebsite;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+					break;
+					
+				case 'donotset':
+				default:
+					$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+					break;
 			}
 		}
 	}

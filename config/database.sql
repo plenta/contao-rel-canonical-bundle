@@ -12,7 +12,6 @@
 -- 
 
 CREATE TABLE `tl_page` (
-  `addCanonical` char(1) NOT NULL default '',
   `canonicalType` varchar(32) NOT NULL default '',
   `canonicalJumpTo` int(10) unsigned NOT NULL default '0',
   `canonicalWebsite` varchar(255) NOT NULL default '',
