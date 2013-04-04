@@ -20,14 +20,6 @@ $GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_l
 /**
  * Fields
  */
-$GLOBALS['TL_DCA']['tl_page']['fields']['addCanonical'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_page']['addCanonical'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 m12')
-);
-
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_page']['canonicalType'],
