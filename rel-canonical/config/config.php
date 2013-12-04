@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
 * Rel Canonical
@@ -11,5 +11,3 @@
 
 
 $GLOBALS['TL_HOOKS']['generatePage'][] = array('ClassRelCanonical', 'createRelCanonical');
-
-?>

@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
 * Rel Canonical
@@ -10,9 +10,12 @@
 */
 
 
-class ClassRelCanonical extends Frontend
+namespace Contao;
+
+
+class ClassRelCanonical extends \Frontend
 {
-	public function createRelCanonical(Database_Result $objPage, Database_Result $objLayout, PageRegular $objPageRegular)
+	public function createRelCanonical($objPage, $objLayout, $objPageRegular)
 	{
 		if($objPage->canonicalType == 'internal')
 		{
@@ -32,7 +35,7 @@ class ClassRelCanonical extends Frontend
 
 		$objCanonicalPage = $this->getPageDetails($objPage->canonicalJumpTo);
 
-		if ($objCanonicalPage->numRows)
+		if ($objCanonicalPage !== null)
 		{
 			if ($objCanonicalPage->domain != '')
 			{
@@ -49,14 +52,12 @@ class ClassRelCanonical extends Frontend
 	private function setRelCanonical($canonicalUrl, $outputFormat)
 	{
 		$xhtmlOutput = '';
-			
+		
 		if($outputFormat == 'xhtml')
 		{
-			$xhtmlOutput = ' /';
+		$xhtmlOutput = ' /';
 		}
-			
+		
 		$GLOBALS['TL_HEAD'][] = '<link rel="canonical" href="' . $canonicalUrl . '"'.$xhtmlOutput.'>';
 	}
 }
-
-?>

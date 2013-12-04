@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
 * Rel Canonical
@@ -28,7 +28,8 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 	'inputType'               => 'select',
 	'options'       		 => array('donotset', 'internal', 'external'),
 	'reference'               => &$GLOBALS['TL_LANG']['RelCanonical'],
-	'eval'                    => array('submitOnChange'=>true)
+	'eval'                    => array('submitOnChange'=>true),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
@@ -37,6 +38,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
 	'exclude'                 => true,
 	'inputType'               => 'pageTree',
 	'eval'                    => array('fieldType'=>'radio'),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'",
 	'save_callback' => array
 	(
 		array('tl_page', 'checkJumpTo')
@@ -48,7 +50,8 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalWebsite'] = array
 	'label' => &$GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'],
 	'exclude' => true,
 	'inputType' => 'text',
-	'eval' => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long')
+	'eval' => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long'),
+	'sql' => "varchar(255) NOT NULL default ''"
 );
 
 
@@ -68,23 +71,24 @@ class tl_page_canonical extends Backend
 		
 		if($objCanonicalPage->numRows > 0)
 		{
-			switch($objCanonicalPage->canonicalType)
+			if($objCanonicalPage->numRows > 0)
 			{
-				case 'internal':
-					$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalJumpTo;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-					break;
-					
-				case 'external':
-					$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalWebsite;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-					break;
-					
-				case 'donotset':
-				default:
-					$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-					break;
+				switch($objCanonicalPage->canonicalType)
+				{
+					case 'internal':
+						$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalJumpTo;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+						break;
+			
+					case 'external':
+						$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalWebsite;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+						break;
+			
+					case 'donotset':
+					default:
+						$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+						break;
+				}
 			}
 		}
 	}
 }
-
-?>

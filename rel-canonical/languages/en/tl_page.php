@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
 * Rel Canonical
@@ -13,9 +13,12 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_page']['canonicalType'] = array('Use rel="canonical"', 'Add rel="canonical" for this page in head section.');
-$GLOBALS['TL_LANG']['tl_page']['canonicalJumpTo'] = array('Internal page', 'Choose a page');
-$GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'] = array('External page', 'Enter a complete URL (including http://…).');
+$GLOBALS['TL_LANG']['tl_page']['canonicalType'][0] = 'Use rel="canonical"';
+$GLOBALS['TL_LANG']['tl_page']['canonicalType'][1] = 'Add rel="canonical" for this page in head section.';
+$GLOBALS['TL_LANG']['tl_page']['canonicalJumpTo'][0] = 'Internal page';
+$GLOBALS['TL_LANG']['tl_page']['canonicalJumpTo'][1] = 'Choose a page';
+$GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'][0] = 'External page';
+$GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'][1] = 'Enter a complete URL (including http://…).';
 
 
 /**
@@ -30,5 +33,3 @@ $GLOBALS['TL_LANG']['tl_page']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['RelCanonical']['donotset'] = 'do not use';
 $GLOBALS['TL_LANG']['RelCanonical']['internal'] = 'internal';
 $GLOBALS['TL_LANG']['RelCanonical']['external'] = 'external';
-
-?>
