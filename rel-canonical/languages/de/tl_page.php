@@ -33,3 +33,4 @@ $GLOBALS['TL_LANG']['tl_page']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['RelCanonical']['donotset'] = 'Nicht setzen';
 $GLOBALS['TL_LANG']['RelCanonical']['internal'] = 'Interne Seite';
 $GLOBALS['TL_LANG']['RelCanonical']['external'] = 'Externe Seite';
+$GLOBALS['TL_LANG']['RelCanonical']['self'] = 'Diese Seite';

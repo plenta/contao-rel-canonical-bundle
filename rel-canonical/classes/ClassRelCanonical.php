@@ -26,6 +26,13 @@ class ClassRelCanonical extends \Frontend
 		{
 			$this->setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
 		}
+		
+		if($objPage->canonicalType == 'self')
+		{
+			global $objPage;			
+			$objPage->canonicalJumpTo = $objPage->id;
+			$this->setRelCanonical($this->generateLink($objPage), $objPage->outputFormat);
+		}
 	}
 	
 	

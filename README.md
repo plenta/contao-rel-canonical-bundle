@@ -1,9 +1,10 @@
-contao-rel-canonical
+Contao-Rel-Canonical
 ====================
 
-Vermeidung von Duplicate Content
+Avoid Duplicate Content
 
 http://de.wikipedia.org/wiki/Canonical_Link
+
 
 Manual
 -------------------
