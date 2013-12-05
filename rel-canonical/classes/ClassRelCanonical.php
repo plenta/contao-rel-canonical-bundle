@@ -24,7 +24,7 @@ class ClassRelCanonical extends \Frontend
 		
 		if($objPage->canonicalType == 'external')
 		{
-			ClassRelCanonical::setRelCanonical(ClassRelCanonical::canonicalWebsite, $objPage->outputFormat);
+			ClassRelCanonical::setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
 		}
 		
 		if($objPage->canonicalType == 'self')
@@ -32,19 +32,6 @@ class ClassRelCanonical extends \Frontend
 			global $objPage;
 			$objPage->canonicalJumpTo = $objPage->id;
 			ClassRelCanonical::setRelCanonical(ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
-		}
-	}
-	
-	
-	public static function createRelCanonicalFromModule($objPage)
-	{
-		if($objPage->canonicalType == 'self')
-		{
-			ClassRelCanonical::setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
-		}
-		else
-		{
-			ClassRelCanonical::createRelCanonical($objPage, null, null);
 		}
 	}
 	

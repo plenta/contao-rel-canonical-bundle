@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_l
  */
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_page']['canonicalType'],
+	'label'                   => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalType'],
 	'default'                 => 'donotset',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_page']['canonicalJumpTo'],
+	'label'                   => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalJumpTo'],
 	'exclude'                 => true,
 	'inputType'               => 'pageTree',
 	'eval'                    => array('fieldType'=>'radio'),
@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalWebsite'] = array
 (
-	'label' => &$GLOBALS['TL_LANG']['tl_page']['canonicalWebsite'],
+	'label' => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'],
 	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long'),

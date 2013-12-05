@@ -50,13 +50,10 @@ class ModuleEventReader extends \Contao\ModuleEventReader
 		
 		if($objEvent->canonicalType == 'self')
 		{
-			$objPage->canonicalWebsite = \Environment::get('request');
+			$objPage->canonicalType = 'external';
+			$objPage->canonicalWebsite = \Environment::get('url') . TL_PATH . '/' . \Environment::get('request');
 		}
-		
-		print \Environment::get('path');
-		
-		\ClassRelCanonical::createRelCanonicalFromModule($objPage, null, null);
-	
+
 		parent::compile();	
 	}
 }

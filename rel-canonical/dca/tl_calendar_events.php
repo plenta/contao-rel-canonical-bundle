@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace(";
  */
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalType'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['canonicalType'],
+	'label'                   => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalType'],
 	'default'                 => 'donotset',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalType'] = array
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalJumpTo'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['canonicalJumpTo'],
+	'label'                   => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalJumpTo'],
 	'exclude'                 => true,
 	'inputType'               => 'pageTree',
 	'eval'                    => array('fieldType'=>'radio'),
@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalJumpTo'] = array
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalWebsite'] = array
 (
-	'label' => &$GLOBALS['TL_LANG']['tl_calendar_events']['canonicalWebsite'],
+	'label' => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'],
 	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long'),
