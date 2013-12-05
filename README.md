@@ -1,4 +1,4 @@
-Contao-rel-canonical
+Contao-Rel-Canonical
 ====================
 
 Avoid Duplicate Content

@@ -3,9 +3,9 @@
 /**
 * Rel Canonical
 *
-* @copyright Christian Barkowsky 2013
+* @copyright Christian Barkowsky 2013-2014
 * @package   contao-rel-canonical
-* @author    Christian Barkowsky <http://www.christianbarkowsky.de>
+* @author    Christian Barkowsky <http://christianbarkowsky.de>
 * @license   LGPL
 */
 
@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 	'default'                 => 'donotset',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'       		 => array('donotset', 'internal', 'external'),
+	'options'       		 => array('donotset', 'internal', 'external', 'self'),
 	'reference'               => &$GLOBALS['TL_LANG']['RelCanonical'],
 	'eval'                    => array('submitOnChange'=>true),
 	'sql'                     => "varchar(32) NOT NULL default ''"
