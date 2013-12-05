@@ -3,7 +3,7 @@
 /**
 * Rel Canonical
 *
-* @copyright Christian Barkowsky 2013
+* @copyright Christian Barkowsky 2013-2014
 * @package   contao-rel-canonical
 * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
 * @license   LGPL
@@ -15,54 +15,67 @@ namespace Contao;
 
 class ClassRelCanonical extends \Frontend
 {
-	public function createRelCanonical($objPage, $objLayout, $objPageRegular)
+	public static function createRelCanonical($objPage, $objLayout, $objPageRegular)
 	{
 		if($objPage->canonicalType == 'internal')
 		{
-			$this->setRelCanonical($this->generateLink($objPage), $objPage->outputFormat);
+			ClassRelCanonical::setRelCanonical(ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
 		}
 		
 		if($objPage->canonicalType == 'external')
 		{
-			$this->setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
+			ClassRelCanonical::setRelCanonical(ClassRelCanonical::canonicalWebsite, $objPage->outputFormat);
 		}
 		
 		if($objPage->canonicalType == 'self')
 		{
-			global $objPage;			
+			global $objPage;
 			$objPage->canonicalJumpTo = $objPage->id;
-			$this->setRelCanonical($this->generateLink($objPage), $objPage->outputFormat);
+			ClassRelCanonical::setRelCanonical(ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
 		}
 	}
 	
 	
-	private function generateLink($objPage)
+	public static function createRelCanonicalFromModule($objPage)
 	{
-		$strDomain = $this->Environment->base;
+		if($objPage->canonicalType == 'self')
+		{
+			ClassRelCanonical::setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
+		}
+		else
+		{
+			ClassRelCanonical::createRelCanonical($objPage, null, null);
+		}
+	}
+	
+	
+	private static function generateLink($objPage)
+	{
+		$strDomain = \Environment::get('base');
 
-		$objCanonicalPage = $this->getPageDetails($objPage->canonicalJumpTo);
+		$objCanonicalPage = \Controller::getPageDetails($objPage->canonicalJumpTo);
 
 		if ($objCanonicalPage !== null)
 		{
 			if ($objCanonicalPage->domain != '')
 			{
-				$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objCanonicalPage->domain . TL_PATH . '/';
+				$strDomain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objCanonicalPage->domain . TL_PATH . '/';
 			}
 		
-			$strUrl = $strDomain . $this->generateFrontendUrl($objCanonicalPage->row(), null, $objCanonicalPage->language);
+			$strUrl = $strDomain . \Controller::generateFrontendUrl($objCanonicalPage->row(), null, $objCanonicalPage->language);
 		}
 		
 		return $strUrl;
 	}
+
 	
-	
-	private function setRelCanonical($canonicalUrl, $outputFormat)
+	protected static function setRelCanonical($canonicalUrl, $outputFormat)
 	{
 		$xhtmlOutput = '';
 		
 		if($outputFormat == 'xhtml')
 		{
-		$xhtmlOutput = ' /';
+			$xhtmlOutput = ' /';
 		}
 		
 		$GLOBALS['TL_HEAD'][] = '<link rel="canonical" href="' . $canonicalUrl . '"'.$xhtmlOutput.'>';
