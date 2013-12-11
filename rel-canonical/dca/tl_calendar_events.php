@@ -11,16 +11,16 @@
 
 
 /**
- * Table tl_page
+ * Table tl_calendar_events
  */
-$GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][] = array('tl_page_canonical', 'switchPalette');
-$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("{protected_legend:hide},", "{rel_canonical_legend},canonicalType;{protected_legend:hide},", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+$GLOBALS['TL_DCA']['tl_calendar_events']['config']['onload_callback'][] = array('tl_calendar_events_canonical', 'switchPalette');
+$GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace(";{publish_legend}", ";{rel_canonical_legend},canonicalType;{publish_legend}", $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default']);
 
 
 /**
  * Fields
  */
-$GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
+$GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalType'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalType'],
 	'default'                 => 'donotset',
@@ -32,7 +32,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalType'] = array
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
-$GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
+$GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalJumpTo'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalJumpTo'],
 	'exclude'                 => true,
@@ -41,11 +41,11 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalJumpTo'] = array
 	'sql'                     => "int(10) unsigned NOT NULL default '0'",
 	'save_callback' => array
 	(
-		array('tl_page', 'checkJumpTo')
+		array('tl_calendar_events_canonical', 'checkJumpTo')
 	)
 );
 
-$GLOBALS['TL_DCA']['tl_page']['fields']['canonicalWebsite'] = array
+$GLOBALS['TL_DCA']['tl_calendar_events']['fields']['canonicalWebsite'] = array
 (
 	'label' => &$GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'],
 	'exclude' => true,
@@ -58,7 +58,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['canonicalWebsite'] = array
 /**
  * Class tl_page_canonical
  */
-class tl_page_canonical extends Backend
+class tl_calendar_events_canonical extends Backend
 {
 	public function switchPalette(DataContainer $dc)
 	{
@@ -67,7 +67,7 @@ class tl_page_canonical extends Backend
             return;
         }
 	
-		$objCanonicalPage = $this->Database->prepare("SELECT canonicalType FROM tl_page WHERE id=?")->limit(1)->execute($dc->id);
+		$objCanonicalPage = $this->Database->prepare("SELECT canonicalType FROM tl_calendar_events WHERE id=?")->limit(1)->execute($dc->id);
 		
 		if($objCanonicalPage->numRows > 0)
 		{
@@ -76,19 +76,33 @@ class tl_page_canonical extends Backend
 				switch($objCanonicalPage->canonicalType)
 				{
 					case 'internal':
-						$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalJumpTo;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+						$GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace("canonicalType;", "canonicalType,canonicalJumpTo;", $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default']);
 						break;
 			
 					case 'external':
-						$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType,canonicalWebsite;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+						$GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace("canonicalType;", "canonicalType,canonicalWebsite;", $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default']);
 						break;
 			
 					case 'donotset':
 					default:
-						$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace("canonicalType;", "canonicalType;", $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+						$GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace("canonicalType;", "canonicalType;", $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default']);
 						break;
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * Prevent circular references
+	 */
+	public function checkJumpTo($varValue, DataContainer $dc)
+	{
+		if ($varValue == $dc->id)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
+		}
+
+		return $varValue;
 	}
 }
