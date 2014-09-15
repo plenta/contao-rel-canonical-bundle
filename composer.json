@@ -1,0 +1,35 @@
+{
+    "name":"christianbarkowsky/rel-canonical",
+    "description":"Avoiding Duplicate Content. Extension for Contao Open Source CMS",
+    "keywords":["google", "rel", "canonical", "duplicate content"],
+    "type":"contao-module",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"Christian Barkowsky",
+            "homepage":"http://christianbarkowsky.de",
+            "email":"hallo@christianbarkowsky.de",
+            "role":"Developer"
+        }
+    ],
+    "support": {
+		"email": "hallo@christianbarkowsky.de",
+		"issues": "https://github.com/christianbarkowsky/rel-canonical/issues",
+		"source": "https://github.com/christianbarkowsky/rel-canonical"
+	},
+    "require":{
+        "php":">=5.3",
+        "contao/core":">=3.0,<4",
+        "contao-community-alliance/composer-plugin":"*"
+    },
+    "replace": {
+        "contao-legacy/rel-canonical": "self.version"
+    },
+    "extra":{
+        "contao": {
+            "sources":{
+                "": "system/modules/rel-canonical"
+            }
+        }
+    }
+}
