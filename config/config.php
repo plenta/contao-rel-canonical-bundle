@@ -10,4 +10,5 @@
 */
 
 
-$GLOBALS['TL_HOOKS']['generatePage'][] = array('ClassRelCanonical', 'createRelCanonical');
+$GLOBALS['TL_HOOKS']['generatePage'][] = array('ClassRelCanonical', 'generatePage');
+$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('ClassRelCanonical', 'parseTemplate');
