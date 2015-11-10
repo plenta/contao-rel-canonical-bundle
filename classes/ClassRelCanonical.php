@@ -15,6 +15,14 @@ namespace Contao;
 
 class ClassRelCanonical extends \Frontend
 {
+
+    /**
+     * Create the canonical
+     *
+     * @param $objPage
+     * @param $objLayout
+     * @param $objPageRegular
+     */
     public static function createRelCanonical($objPage, $objLayout, $objPageRegular)
     {
         if ($objPage->canonicalType == 'internal') {
@@ -33,8 +41,16 @@ class ClassRelCanonical extends \Frontend
     }
 
 
+    /**
+     * Generate the canonical link
+     *
+     * @param $objPage
+     * @return string
+     */
     private static function generateLink($objPage)
     {
+        $strUrl = '';
+
         $strDomain = \Environment::get('base');
 
         $objCanonicalPage = \Controller::getPageDetails($objPage->canonicalJumpTo);
@@ -51,6 +67,12 @@ class ClassRelCanonical extends \Frontend
     }
 
 
+    /**
+     * Add the canonical to the page header
+     *
+     * @param $canonicalUrl
+     * @param $outputFormat
+     */
     protected static function setRelCanonical($canonicalUrl, $outputFormat)
     {
         $xhtmlOutput = '';
