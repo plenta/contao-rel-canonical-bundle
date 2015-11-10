@@ -3,7 +3,7 @@
 /**
 * Rel Canonical
 *
-* @copyright Christian Barkowsky 2013-2014
+* @copyright Christian Barkowsky 2013-2015
 * @package   contao-rel-canonical
 * @author    Christian Barkowsky <http://www.christianbarkowsky.de>, Jan Theofel <jan@theofel.de>
 * @license   LGPL
@@ -26,6 +26,7 @@ $GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'][1] = 'Enter a complete U
  */
 $GLOBALS['TL_LANG']['tl_page']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_calendar_events']['rel_canonical_legend'] = 'Tag rel canonical';
+$GLOBALS['TL_LANG']['tl_news']['rel_canonical_legend'] = 'Tag rel canonical';
 
 
 /**

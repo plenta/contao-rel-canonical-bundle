@@ -16,7 +16,7 @@
 namespace RelCanonical;
 
 
-class ModuleEventReader extends \Contao\ModuleEventReader
+class ModuleNewsReader extends \Contao\ModuleNewsReader
 {
 
     public function generate()
@@ -29,18 +29,18 @@ class ModuleEventReader extends \Contao\ModuleEventReader
     {
         global $objPage;
 
-        // Get the current event
-        $objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias(\Input::get('events'), $this->cal_calendar);
-
-        if ($objEvent === null) {
+        // Get the current news item
+        $objNewsItem = \NewsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->news_archives);
+        
+        if ($objNewsItem === null) {
             parent::compile();
         }
 
-        $objPage->canonicalType = $objEvent->canonicalType;
-        $objPage->canonicalJumpTo = $objEvent->canonicalJumpTo;
-        $objPage->canonicalWebsite = $objEvent->canonicalWebsite;
+        $objPage->canonicalType = $objNewsItem->canonicalType;
+        $objPage->canonicalJumpTo = $objNewsItem->canonicalJumpTo;
+        $objPage->canonicalWebsite = $objNewsItem->canonicalWebsite;
 
-        if ($objEvent->canonicalType == 'self') {
+        if ($objNewsItem->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
             $objPage->canonicalWebsite = \Environment::get('url') . TL_PATH . '/' . \Environment::get('request');
         }
