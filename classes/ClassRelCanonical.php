@@ -3,17 +3,26 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2015
+ * @copyright Christian Barkowsky 2013-2016
  * @package   contao-rel-canonical
  * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
  * @license   LGPL
  */
 
 
-namespace Contao;
+namespace Barkowsky\RelCanonical;
 
 
-class ClassRelCanonical extends \Frontend
+use Contao\Environment;
+use Contao\PageModel;
+use Contao\Controller;
+
+
+/**
+ * Class ClassRelCanonical
+ * @package Barkowsky\RelCanonical
+ */
+class ClassRelCanonical extends \Contao\Frontend
 {
 
     /**
@@ -26,17 +35,17 @@ class ClassRelCanonical extends \Frontend
     public static function createRelCanonical($objPage, $objLayout, $objPageRegular)
     {
         if ($objPage->canonicalType == 'internal') {
-            ClassRelCanonical::setRelCanonical(ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
+            \ClassRelCanonical::setRelCanonical(\ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
         }
 
         if ($objPage->canonicalType == 'external') {
-            ClassRelCanonical::setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
+            \ClassRelCanonical::setRelCanonical($objPage->canonicalWebsite, $objPage->outputFormat);
         }
 
         if ($objPage->canonicalType == 'self') {
             global $objPage;
             $objPage->canonicalJumpTo = $objPage->id;
-            ClassRelCanonical::setRelCanonical(ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
+            \ClassRelCanonical::setRelCanonical(\ClassRelCanonical::generateLink($objPage), $objPage->outputFormat);
         }
     }
 
@@ -53,7 +62,7 @@ class ClassRelCanonical extends \Frontend
 
         $strDomain = \Environment::get('base');
 
-        $objCanonicalPage = \Controller::getPageDetails($objPage->canonicalJumpTo);
+        $objCanonicalPage = \PageModel::findWithDetails($objPage->canonicalJumpTo);
 
         if ($objCanonicalPage !== null) {
             if ($objCanonicalPage->domain != '') {

@@ -3,19 +3,24 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2015
+ * @copyright Christian Barkowsky 2013-2016
  * @package   contao-rel-canonical
  * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
  * @license   LGPL
  */
 
 
+namespace Barkowsky\RelCanonical;
+
+
+use Contao\Environment;
+use Contao\Input;
+
+
 /**
- * Run in a custom namespace, so the class can be replaced
+ * Class ModuleEventReader
+ * @package Barkowsky\RelCanonical
  */
-namespace RelCanonical;
-
-
 class ModuleEventReader extends \Contao\ModuleEventReader
 {
 
@@ -30,7 +35,7 @@ class ModuleEventReader extends \Contao\ModuleEventReader
         global $objPage;
 
         // Get the current event
-        $objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias(\Input::get('events'), $this->cal_calendar);
+        $objEvent = \Contao\CalendarEventsModel::findPublishedByParentAndIdOrAlias(\Input::get('events'), $this->cal_calendar);
 
         if ($objEvent === null) {
             parent::compile();

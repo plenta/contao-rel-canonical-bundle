@@ -3,19 +3,24 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2015
+ * @copyright Christian Barkowsky 2013-2016
  * @package   contao-rel-canonical
  * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
  * @license   LGPL
  */
 
 
+namespace Barkowsky\RelCanonical;
+
+
+use Contao\Environment;
+use Contao\Input;
+
+
 /**
- * Run in a custom namespace, so the class can be replaced
+ * Class ModuleNewsReader
+ * @package Barkowsky\RelCanonical
  */
-namespace RelCanonical;
-
-
 class ModuleNewsReader extends \Contao\ModuleNewsReader
 {
 
@@ -30,7 +35,7 @@ class ModuleNewsReader extends \Contao\ModuleNewsReader
         global $objPage;
 
         // Get the current news item
-        $objNewsItem = \NewsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->news_archives);
+        $objNewsItem = \Contao\NewsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->news_archives);
         
         if ($objNewsItem === null) {
             parent::compile();
