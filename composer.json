@@ -13,13 +13,13 @@
         }
     ],
     "support": {
-		"email": "hallo@christianbarkowsky.de",
-		"issues": "https://github.com/christianbarkowsky/rel-canonical/issues",
-		"source": "https://github.com/christianbarkowsky/rel-canonical"
-	},
+        "email": "hallo@christianbarkowsky.de",
+        "issues": "https://github.com/christianbarkowsky/rel-canonical/issues",
+        "source": "https://github.com/christianbarkowsky/rel-canonical"
+    },
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.0,<4",
+        "contao/core":"~3.5 || ~4.2",
         "contao-community-alliance/composer-plugin":"*"
     },
     "replace": {
