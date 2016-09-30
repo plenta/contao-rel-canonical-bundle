@@ -27,6 +27,7 @@ $GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'][1] = 'Enter a complete U
 $GLOBALS['TL_LANG']['tl_page']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_calendar_events']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_news']['rel_canonical_legend'] = 'Tag rel canonical';
+$GLOBALS['TL_LANG']['tl_faq']['rel_canonical_legend'] = 'Tag rel canonical';
 
 
 /**
