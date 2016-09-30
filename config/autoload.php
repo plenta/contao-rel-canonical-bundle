@@ -24,4 +24,5 @@ ClassLoader::addClasses(array
     // Modules
     'Barkowsky\RelCanonical\ModuleEventReader' => 'system/modules/rel-canonical/modules/ModuleEventReaderRelCannonical.php',
     'Barkowsky\RelCanonical\ModuleNewsReader' => 'system/modules/rel-canonical/modules/ModuleNewsReaderRelCannonical.php',
+    'Barkowsky\RelCanonical\ModuleFaqReader' => 'system/modules/rel-canonical/modules/ModuleFaqReaderRelCannonical.php',
 ));
