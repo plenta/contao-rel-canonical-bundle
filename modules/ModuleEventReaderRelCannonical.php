@@ -15,6 +15,7 @@ namespace Barkowsky\RelCanonical;
 
 use Contao\Environment;
 use Contao\Input;
+use Contao\CalendarEventsModel;
 
 
 /**
@@ -35,7 +36,7 @@ class ModuleEventReader extends \Contao\ModuleEventReader
         global $objPage;
 
         // Get the current event
-        $objEvent = \Contao\CalendarEventsModel::findPublishedByParentAndIdOrAlias(\Input::get('events'), $this->cal_calendar);
+        $objEvent = CalendarEventsModel::findPublishedByParentAndIdOrAlias(Input::get('events'), $this->cal_calendar);
 
         if ($objEvent === null) {
             parent::compile();
@@ -47,7 +48,7 @@ class ModuleEventReader extends \Contao\ModuleEventReader
 
         if ($objEvent->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
-            $objPage->canonicalWebsite = \Environment::get('url') . TL_PATH . '/' . \Environment::get('request');
+            $objPage->canonicalWebsite = Environment::get('url') . TL_PATH . '/' . Environment::get('request');
         }
 
         parent::compile();

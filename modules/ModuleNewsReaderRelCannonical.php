@@ -15,6 +15,7 @@ namespace Barkowsky\RelCanonical;
 
 use Contao\Environment;
 use Contao\Input;
+use Contao\NewsModel;
 
 
 /**
@@ -35,7 +36,7 @@ class ModuleNewsReader extends \Contao\ModuleNewsReader
         global $objPage;
 
         // Get the current news item
-        $objNewsItem = \Contao\NewsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->news_archives);
+        $objNewsItem = NewsModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $this->news_archives);
         
         if ($objNewsItem === null) {
             parent::compile();
@@ -47,7 +48,7 @@ class ModuleNewsReader extends \Contao\ModuleNewsReader
 
         if ($objNewsItem->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
-            $objPage->canonicalWebsite = \Environment::get('url') . TL_PATH . '/' . \Environment::get('request');
+            $objPage->canonicalWebsite = Environment::get('url') . TL_PATH . '/' . Environment::get('request');
         }
 
         parent::compile();

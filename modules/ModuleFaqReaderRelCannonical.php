@@ -15,6 +15,7 @@ namespace Barkowsky\RelCanonical;
 
 use Contao\Environment;
 use Contao\Input;
+use Contao\FaqModel;
 
 
 /**
@@ -35,7 +36,7 @@ class ModuleFaqReader extends \Contao\ModuleFaqReader
         global $objPage;
 
         // Get the current faq item
-        $objFaqItem = \Contao\FaqModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->faq_categories);
+        $objFaqItem = FaqModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $this->faq_categories);
         
         if ($objFaqItem === null) {
             parent::compile();
@@ -47,7 +48,7 @@ class ModuleFaqReader extends \Contao\ModuleFaqReader
 
         if ($objFaqItem->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
-            $objPage->canonicalWebsite = \Environment::get('url') . TL_PATH . '/' . \Environment::get('request');
+            $objPage->canonicalWebsite = Environment::get('url') . TL_PATH . '/' . Environment::get('request');
         }
 
         parent::compile();
