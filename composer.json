@@ -20,7 +20,7 @@
     "require":{
         "php":">=5.5",
         "contao/core":"~3.5 || ~4.3",
-        "contao-community-alliance/composer-plugin": "~3.0"
+        "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
     },
     "replace": {
         "contao-legacy/rel-canonical": "self.version"
