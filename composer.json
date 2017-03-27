@@ -8,12 +8,10 @@
         {
             "name":"Christian Barkowsky",
             "homepage":"http://brkwsky.de",
-            "email":"hallo@brkwsky.de",
             "role":"Developer"
         }
     ],
     "support": {
-        "email": "hallo@brkwsky.de",
         "issues": "https://github.com/christianbarkowsky/rel-canonical/issues",
         "source": "https://github.com/christianbarkowsky/rel-canonical"
     },
