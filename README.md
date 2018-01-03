@@ -18,4 +18,4 @@ Manual
 Contributor
 -------------------
 
-* Christian Barkowsky <hallo@christianbarkowsky.de>
+* Christian Barkowsky <hallo@brkwsky.de>
