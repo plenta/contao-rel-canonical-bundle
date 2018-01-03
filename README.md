@@ -9,7 +9,7 @@ http://de.wikipedia.org/wiki/Canonical_Link
 Manual
 -------------------
 
-* http://www.contao-anleitungen.de/post/rel-canonical-nutzen.html
+* https://brkwsky.de/rel-canonical-in-contao-verwenden.html
 
 
 Contributor
