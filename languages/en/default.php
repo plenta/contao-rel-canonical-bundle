@@ -1,14 +1,13 @@
 <?php
 
 /**
-* Rel Canonical
-*
-* @copyright Christian Barkowsky 2013-2016
-* @package   contao-rel-canonical
-* @author    Christian Barkowsky <http://www.christianbarkowsky.de>, Jan Theofel <jan@theofel.de>
-* @license   LGPL
-*/
-
+ * Rel Canonical
+ *
+ * @copyright Christian Barkowsky 2013-2019
+ * @package   contao-rel-canonical
+ * @author    Christian Barkowsky <https://brkwsky.de>
+ * @license   LGPL
+ */
 
 /**
  * Fields

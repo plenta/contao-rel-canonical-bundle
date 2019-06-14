@@ -3,12 +3,11 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2016
+ * @copyright Christian Barkowsky 2013-2019
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <http://christianbarkowsky.de>
+ * @author    Christian Barkowsky <https://brkwsky.de>
  * @license   LGPL
  */
-
 
 /**
  * Table tl_page

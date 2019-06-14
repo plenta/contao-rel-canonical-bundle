@@ -3,26 +3,24 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2016
+ * @copyright Christian Barkowsky 2013-2019
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
+ * @author    Christian Barkowsky <https://brkwsky.de>
  * @license   LGPL
  */
 
-
 namespace Barkowsky\RelCanonical;
-
 
 use Contao\Environment;
 use Contao\Input;
+use Contao\ModuleEventReader;
 use Contao\CalendarEventsModel;
-
 
 /**
  * Class ModuleEventReader
  * @package Barkowsky\RelCanonical
  */
-class ModuleEventReader extends \Contao\ModuleEventReader
+class ModuleEventReaderRelCannonical extends ModuleEventReader
 {
 
     public function generate()

@@ -3,26 +3,24 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2016
+ * @copyright Christian Barkowsky 2013-2019
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
+ * @author    Christian Barkowsky <https://brkwsky.de>
  * @license   LGPL
  */
 
-
 namespace Barkowsky\RelCanonical;
 
-
-use Contao\Environment;
+use Contao\Frontend;
 use Contao\PageModel;
 use Contao\Controller;
-
+use Contao\Environment;
 
 /**
  * Class ClassRelCanonical
  * @package Barkowsky\RelCanonical
  */
-class ClassRelCanonical extends \Contao\Frontend
+class ClassRelCanonical extends Frontend
 {
 
     /**
@@ -60,16 +58,16 @@ class ClassRelCanonical extends \Contao\Frontend
     {
         $strUrl = '';
 
-        $strDomain = \Environment::get('base');
+        $strDomain = Environment::get('base');
 
-        $objCanonicalPage = \PageModel::findWithDetails($objPage->canonicalJumpTo);
+        $objCanonicalPage = PageModel::findWithDetails($objPage->canonicalJumpTo);
 
         if ($objCanonicalPage !== null) {
             if ($objCanonicalPage->domain != '') {
-                $strDomain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objCanonicalPage->domain . TL_PATH . '/';
+                $strDomain = (Environment::get('ssl') ? 'https://' : 'http://') . $objCanonicalPage->domain . TL_PATH . '/';
             }
 
-            $strUrl = $strDomain . \Controller::generateFrontendUrl($objCanonicalPage->row(), null, $objCanonicalPage->language);
+            $strUrl = $strDomain . Controller::generateFrontendUrl($objCanonicalPage->row(), null, $objCanonicalPage->language);
         }
 
         return $strUrl;

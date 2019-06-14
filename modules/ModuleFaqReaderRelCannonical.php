@@ -3,12 +3,11 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2016
+ * @copyright Christian Barkowsky 2013-2019
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <http://www.christianbarkowsky.de>
+ * @author    Christian Barkowsky <https://brkwsky.de>
  * @license   LGPL
  */
-
 
 namespace Barkowsky\RelCanonical;
 
@@ -22,7 +21,7 @@ use Contao\FaqModel;
  * Class ModuleFaqReader
  * @package Barkowsky\RelCanonical
  */
-class ModuleFaqReader extends \Contao\ModuleFaqReader
+class ModuleFaqReaderRelCannonical extends \Contao\ModuleFaqReader
 {
 
     public function generate()
