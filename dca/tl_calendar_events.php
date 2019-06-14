@@ -13,8 +13,7 @@
  * Table tl_calendar_events
  */
 $GLOBALS['TL_DCA']['tl_calendar_events']['config']['onload_callback'][] = array('tl_calendar_events_canonical', 'switchPalette');
-$GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace(";{publish_legend}", ";{rel_canonical_legend},canonicalType;{publish_legend}", $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default']);
-
+$GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default'] = str_replace(";{publish_legend},", ";{rel_canonical_legend},canonicalType;{publish_legend},", $GLOBALS['TL_DCA']['tl_calendar_events']['palettes']['default']);
 
 /**
  * Fields
@@ -86,7 +85,6 @@ class tl_calendar_events_canonical extends Backend
             }
         }
     }
-
 
     /**
      * Prevent circular references
