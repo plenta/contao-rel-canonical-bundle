@@ -14,8 +14,7 @@
 /**
  * Register the classes
  */
-ClassLoader::addClasses(array
-(
+ClassLoader::addClasses([
     // Classes
     'Barkowsky\RelCanonical\ClassRelCanonical' => 'system/modules/rel-canonical/classes/ClassRelCanonical.php',
 
@@ -23,4 +22,4 @@ ClassLoader::addClasses(array
     'Barkowsky\RelCanonical\ModuleEventReaderRelCannonical' => 'system/modules/rel-canonical/modules/ModuleEventReaderRelCannonical.php',
     'Barkowsky\RelCanonical\ModuleNewsReaderRelCannonical' => 'system/modules/rel-canonical/modules/ModuleNewsReaderRelCannonical.php',
     'Barkowsky\RelCanonical\ModuleFaqReaderRelCannonical' => 'system/modules/rel-canonical/modules/ModuleFaqReaderRelCannonical.php',
-));
+]);
