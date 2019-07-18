@@ -1,14 +1,13 @@
 <?php
 
 /**
-* Rel Canonical
-*
-* @copyright Christian Barkowsky 2013-2014
-* @package   contao-rel-canonical
-* @author    Christian Barkowsky <http://www.christianbarkowsky.de>, Jan Theofel <jan@theofel.de>
-* @license   LGPL
-*/
-
+ * Rel Canonical
+ *
+ * @copyright Christian Barkowsky 2013-2019
+ * @package   contao-rel-canonical
+ * @author    Christian Barkowsky <https://brkwsky.de>
+ * @license   LGPL
+ */
 
 /**
  * Fields
@@ -26,6 +25,8 @@ $GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'][1] = 'Bitte geben Sie ei
  */
 $GLOBALS['TL_LANG']['tl_page']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_calendar_events']['rel_canonical_legend'] = 'Tag rel canonical';
+$GLOBALS['TL_LANG']['tl_news']['rel_canonical_legend'] = 'Tag rel canonical';
+$GLOBALS['TL_LANG']['tl_faq']['rel_canonical_legend'] = 'Tag rel canonical';
 
 
 /**
