@@ -10,6 +10,12 @@
       "homepage":"https://brkwsky.de"
     }
   ],
+  "funding": [
+    {
+    "type": "github",
+    "url": "https://github.com/sponsors/christianbarkowsky"
+    }
+  ],
   "support": {
     "issues": "https://github.com/christianbarkowsky/rel-canonical/issues",
     "source": "https://github.com/christianbarkowsky/rel-canonical",
