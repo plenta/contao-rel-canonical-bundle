@@ -59,9 +59,9 @@ $GLOBALS['TL_DCA']['tl_news']['fields']['canonicalWebsite'] = array
  */
 class tl_news_canonical extends Backend
 {
-    public function switchPalette(DataContainer $dc)
+    public function switchPalette(DataContainer $dc = null)
     {
-        if (!$dc->id) {
+        if ($dc === null || !$dc->id) {
             return;
         }
 
