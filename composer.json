@@ -7,7 +7,7 @@
   "authors":[
     {
       "name":"Christian Barkowsky",
-      "homepage":"https://brkwsky.de"
+      "homepage":"https://plenta.io"
     }
   ],
   "funding": [
@@ -19,7 +19,7 @@
   "support": {
     "issues": "https://github.com/christianbarkowsky/rel-canonical/issues",
     "source": "https://github.com/christianbarkowsky/rel-canonical",
-    "docs": "https://brkwsky.de/rel-canonical-in-contao-verwenden.html"
+    "docs": "https://plenta.io/rel-canonical-in-contao-verwenden"
   },
   "require":{
     "php":">=5.6",
