@@ -3,38 +3,29 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2019
+ * @copyright Christian Barkowsky 2013-2022
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <https://brkwsky.de>
+ * @author    Christian Barkowsky <https://plenta.io>
  * @license   LGPL
  */
 
 namespace Barkowsky\RelCanonical;
 
-
-use Contao\Environment;
 use Contao\Input;
+use Contao\System;
 use Contao\FaqModel;
 
-
-/**
- * Class ModuleFaqReader
- * @package Barkowsky\RelCanonical
- */
 class ModuleFaqReaderRelCannonical extends \Contao\ModuleFaqReader
 {
-
     public function generate()
     {
         return parent::generate();
     }
 
-
     protected function compile()
     {
         global $objPage;
 
-        // Get the current faq item
         $objFaqItem = FaqModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $this->faq_categories);
         
         if ($objFaqItem === null) {
@@ -47,7 +38,9 @@ class ModuleFaqReaderRelCannonical extends \Contao\ModuleFaqReader
 
         if ($objFaqItem->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
-            $objPage->canonicalWebsite = Environment::get('url') . TL_PATH . '/' . Environment::get('request');
+
+            $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+            $objPage->canonicalWebsite = $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo();
         }
 
         parent::compile();

@@ -3,9 +3,9 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2019
+ * @copyright Christian Barkowsky 2013-2022
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <https://brkwsky.de>
+ * @author    Christian Barkowsky <https://plenta.io>
  * @license   LGPL
  */
 

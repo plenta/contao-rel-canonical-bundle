@@ -3,26 +3,21 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2019
+ * @copyright Christian Barkowsky 2013-2022
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <https://brkwsky.de>
+ * @author    Christian Barkowsky <https://plenta.io>
  * @license   LGPL
  */
 
 namespace Barkowsky\RelCanonical;
 
 use Contao\Input;
+use Contao\System;
 use Contao\NewsModel;
-use Contao\Environment;
 use Contao\ModuleNewsReader;
 
-/**
- * Class ModuleNewsReader
- * @package Barkowsky\RelCanonical
- */
 class ModuleNewsReaderRelCannonical extends ModuleNewsReader
 {
-
     public function generate()
     {
         return parent::generate();
@@ -32,7 +27,6 @@ class ModuleNewsReaderRelCannonical extends ModuleNewsReader
     {
         global $objPage;
 
-        // Get the current news item
         $objNewsItem = NewsModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $this->news_archives);
         
         if ($objNewsItem === null) {
@@ -45,7 +39,9 @@ class ModuleNewsReaderRelCannonical extends ModuleNewsReader
 
         if ($objNewsItem->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
-            $objPage->canonicalWebsite = Environment::get('url') . TL_PATH . '/' . Environment::get('request');
+
+            $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+            $objPage->canonicalWebsite = $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo();
         }
 
         parent::compile();

@@ -3,37 +3,30 @@
 /**
  * Rel Canonical
  *
- * @copyright Christian Barkowsky 2013-2019
+ * @copyright Christian Barkowsky 2013-2022
  * @package   contao-rel-canonical
- * @author    Christian Barkowsky <https://brkwsky.de>
+ * @author    Christian Barkowsky <https://plenta.io>
  * @license   LGPL
  */
 
 namespace Barkowsky\RelCanonical;
 
-use Contao\Environment;
 use Contao\Input;
+use Contao\System;
 use Contao\ModuleEventReader;
 use Contao\CalendarEventsModel;
 
-/**
- * Class ModuleEventReader
- * @package Barkowsky\RelCanonical
- */
 class ModuleEventReaderRelCannonical extends ModuleEventReader
 {
-
     public function generate()
     {
         return parent::generate();
     }
 
-
     protected function compile()
     {
         global $objPage;
 
-        // Get the current event
         $objEvent = CalendarEventsModel::findPublishedByParentAndIdOrAlias(Input::get('events'), $this->cal_calendar);
 
         if ($objEvent === null) {
@@ -46,7 +39,9 @@ class ModuleEventReaderRelCannonical extends ModuleEventReader
 
         if ($objEvent->canonicalType == 'self') {
             $objPage->canonicalType = 'external';
-            $objPage->canonicalWebsite = Environment::get('url') . TL_PATH . '/' . Environment::get('request');
+
+            $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+            $objPage->canonicalWebsite = $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo();
         }
 
         parent::compile();
