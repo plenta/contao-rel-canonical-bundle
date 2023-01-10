@@ -1,35 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Rel Canonical
+ * Rel Canonical for Contao Open Source CMS
  *
- * @copyright Christian Barkowsky 2013-2022
- * @package   contao-rel-canonical
- * @author    Christian Barkowsky <https://plenta.io>
- * @license   LGPL
+ * @copyright     Copyright (c) 2023, Plenta.io
+ * @author        Plenta.io <https://plenta.io>
+ * @link          https://github.com/plenta/
  */
 
-namespace Barkowsky\RelCanonical;
+namespace Plenta\ContaoRelCanonicalBundle\Modules;
 
-use Contao\Input;
-use Contao\System;
-use Contao\ModuleEventReader;
 use Contao\CalendarEventsModel;
+use Contao\Input;
+use Contao\ModuleEventReader;
+use Contao\System;
 
-class ModuleEventReaderRelCannonical extends ModuleEventReader
+class ModuleEventReaderRelCanonical extends ModuleEventReader
 {
     public function generate()
     {
         return parent::generate();
     }
 
-    protected function compile()
+    protected function compile(): void
     {
         global $objPage;
 
         $objEvent = CalendarEventsModel::findPublishedByParentAndIdOrAlias(Input::get('events'), $this->cal_calendar);
 
-        if ($objEvent === null) {
+        if (null === $objEvent) {
             parent::compile();
         }
 
@@ -37,8 +38,8 @@ class ModuleEventReaderRelCannonical extends ModuleEventReader
         $objPage->canonicalJumpTo = $objEvent->canonicalJumpTo;
         $objPage->canonicalWebsite = $objEvent->canonicalWebsite;
 
-        if ($objEvent->canonicalType == 'self') {
-            $objPage->canonicalType = 'external';
+        if ('self' == $objEvent->canonicalType) {
+            $objPage->canonicalType = 'rc_external';
 
             $request = System::getContainer()->get('request_stack')->getCurrentRequest();
             $objPage->canonicalWebsite = $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo();

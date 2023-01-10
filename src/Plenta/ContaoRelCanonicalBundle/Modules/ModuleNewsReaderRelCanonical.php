@@ -1,35 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Rel Canonical
+ * Rel Canonical for Contao Open Source CMS
  *
- * @copyright Christian Barkowsky 2013-2022
- * @package   contao-rel-canonical
- * @author    Christian Barkowsky <https://plenta.io>
- * @license   LGPL
+ * @copyright     Copyright (c) 2023, Plenta.io
+ * @author        Plenta.io <https://plenta.io>
+ * @link          https://github.com/plenta/
  */
 
-namespace Barkowsky\RelCanonical;
+namespace Plenta\ContaoRelCanonicalBundle\Modules;
 
 use Contao\Input;
-use Contao\System;
-use Contao\NewsModel;
 use Contao\ModuleNewsReader;
+use Contao\NewsModel;
+use Contao\System;
 
-class ModuleNewsReaderRelCannonical extends ModuleNewsReader
+class ModuleNewsReaderRelCanonical extends ModuleNewsReader
 {
     public function generate()
     {
         return parent::generate();
     }
 
-    protected function compile()
+    protected function compile(): void
     {
         global $objPage;
 
         $objNewsItem = NewsModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $this->news_archives);
-        
-        if ($objNewsItem === null) {
+
+        if (null === $objNewsItem) {
             parent::compile();
         }
 
@@ -37,8 +38,8 @@ class ModuleNewsReaderRelCannonical extends ModuleNewsReader
         $objPage->canonicalJumpTo = $objNewsItem->canonicalJumpTo;
         $objPage->canonicalWebsite = $objNewsItem->canonicalWebsite;
 
-        if ($objNewsItem->canonicalType == 'self') {
-            $objPage->canonicalType = 'external';
+        if ('self' == $objNewsItem->canonicalType) {
+            $objPage->canonicalType = 'rc_external';
 
             $request = System::getContainer()->get('request_stack')->getCurrentRequest();
             $objPage->canonicalWebsite = $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo();

@@ -23,7 +23,6 @@ $GLOBALS['TL_LANG']['RelCanonical']['canonicalWebsite'][1] = 'Enter a complete U
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_page']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_calendar_events']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_news']['rel_canonical_legend'] = 'Tag rel canonical';
 $GLOBALS['TL_LANG']['tl_faq']['rel_canonical_legend'] = 'Tag rel canonical';
@@ -33,6 +32,6 @@ $GLOBALS['TL_LANG']['tl_faq']['rel_canonical_legend'] = 'Tag rel canonical';
  * MISC
  */
 $GLOBALS['TL_LANG']['RelCanonical']['donotset'] = 'do not use';
-$GLOBALS['TL_LANG']['RelCanonical']['internal'] = 'internal';
-$GLOBALS['TL_LANG']['RelCanonical']['external'] = 'external';
+$GLOBALS['TL_LANG']['RelCanonical']['rc_internal'] = 'internal';
+$GLOBALS['TL_LANG']['RelCanonical']['rc_external'] = 'external';
 $GLOBALS['TL_LANG']['RelCanonical']['self'] = 'this page';
